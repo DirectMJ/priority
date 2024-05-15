@@ -1,17 +1,12 @@
 function createProcessTable() {
-  // Get the number of processes from the user input
   const numProcesses = document.getElementById('num_processes').value;
-  
-  // Create the table element
   const table = document.createElement('table');
   table.setAttribute('id', 'process_table');
 
-  // Create the table header row
   const headerRow = document.createElement('tr');
   headerRow.innerHTML = '<th>Process</th><th>Burst Time</th><th>Priority</th>';
   table.appendChild(headerRow);
 
-  // Create rows for process input
   for (let i = 0; i < numProcesses; i++) {
     const row = document.createElement('tr');
     row.innerHTML = `
@@ -22,18 +17,14 @@ function createProcessTable() {
     table.appendChild(row);
   }
 
-  // Add the table to the process_table div
   const processTableDiv = document.getElementById('process_table');
   processTableDiv.innerHTML = ''; // Clear existing table content
   processTableDiv.appendChild(table);
 }
 
 function calculatePriority() {
-  // Get the number of processes from the user input
   const numProcesses = document.getElementById('num_processes').value;
- 
 
-  // Get burst times and priorities from the table
   const processInfo = [];
   for (let i = 0; i < numProcesses; i++) {
     const burstTimeInput = document.getElementById(`burst_time_${i}`);
@@ -49,7 +40,7 @@ function calculatePriority() {
     });
   }
 
-  // Sort processes based on priority (lowest priority first)
+  // Sort processes
   processInfo.sort((a, b) => a.priority - b.priority);
 
   // Calculate completion times
@@ -75,16 +66,14 @@ function calculatePriority() {
   const totalWaitingTime = processData.reduce((acc, curr) => acc + curr.waitingTime, 0);
   const averageWaitingTime = totalWaitingTime / numProcesses;
 
-  // Create the results table element
+  // Create the results
   const resultTable = document.createElement('table');
   resultTable.setAttribute('id', 'result_table');
 
-  // Create the table header row
   const headerRow = document.createElement('tr');
   headerRow.innerHTML = '<th>Process</th><th>Burst Time</th><th>Completion Time</th><th>Waiting Time</th>';
   resultTable.appendChild(headerRow);
-
-  // Create rows for results
+  
   processData.forEach(process => {
     const row = document.createElement('tr');
     row.innerHTML = `
@@ -104,7 +93,7 @@ function calculatePriority() {
   `;
   resultTable.appendChild(averageRow);
 
-  // Display results by adding the table to the result div
+  // Display results
   const resultDiv = document.getElementById('result');
   resultDiv.innerHTML = ''; // Clear existing content
   resultDiv.appendChild(resultTable);
